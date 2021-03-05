@@ -67,7 +67,7 @@ class DetailActivity : AppCompatActivity() {
 @Composable
 fun MyApp(
     dog: Dog,
-    onClick : (() -> Unit)? = null
+    onClick: (() -> Unit)? = null
 ) {
     val typography = MaterialTheme.typography
     Surface(color = MaterialTheme.colors.background) {
@@ -78,9 +78,11 @@ fun MyApp(
                 },
                 navigationIcon = {
                     Image(
-                        painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24) ,
+                        painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24),
                         contentDescription = null,
-                        Modifier.padding(16.dp).clickable { onClick?.invoke() }
+                        Modifier
+                            .padding(16.dp)
+                            .clickable { onClick?.invoke() }
                     )
                 }
             )
