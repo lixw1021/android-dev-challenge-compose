@@ -121,4 +121,3 @@ fun lightViewPreview() {
         MyApp(dog = dog)
     }
 }
-
