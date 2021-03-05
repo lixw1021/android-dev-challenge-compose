@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         setContent {
             MyTheme {
                 MyApp(dogs) {
-                    startActivity(DetailActivity.newInstance(this,it))
+                    startActivity(DetailActivity.newInstance(this, it))
                 }
             }
         }
@@ -68,7 +68,7 @@ fun MyApp(dogs: List<Dog>, onclick: (Dog) -> Unit) {
                 }
             )
             LazyColumn(
-                contentPadding = PaddingValues(horizontal = 16.dp,vertical = 16.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 dogs.forEach {

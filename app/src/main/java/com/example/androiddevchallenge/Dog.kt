@@ -12,7 +12,7 @@ data class Dog(
     val category: GogCategory,
     val address: String,
     val introduce: String,
-    @DrawableRes val image:Int
+    @DrawableRes val image: Int
 ) : Parcelable
 
 enum class GogCategory(val breed: String) {
