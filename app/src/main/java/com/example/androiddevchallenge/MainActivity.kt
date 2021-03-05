@@ -130,7 +130,7 @@ fun LightPreview() {
     }
 }
 
-//@Preview("Dark Theme", widthDp = 360, heightDp = 640)
+// @Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun DarkPreview() {
     val dogs = DogRepository().getDogs()
