@@ -22,9 +22,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,10 +51,20 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp(dogs: List<Dog>, onclick: (Dog) -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
-        LazyColumn {
-            dogs.forEach {
-                item {
-                    DogItem(dog = it, onclick = onclick)
+        Column {
+            TopAppBar(
+                title = {
+                    Text(text = "Dog Finder")
+                }
+            )
+            LazyColumn(
+                contentPadding = PaddingValues(horizontal = 16.dp,vertical = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                dogs.forEach {
+                    item {
+                        DogItem(dog = it, onclick = onclick)
+                    }
                 }
             }
         }
@@ -67,30 +76,36 @@ fun DogItem(
     dog: Dog,
     onclick: ((Dog) -> Unit)
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(16.dp)
-            .clickable { onclick.invoke(dog) }
-            .fillMaxWidth()
+    Card(
+        elevation = 4.dp,
+        shape = RoundedCornerShape(8.dp),
     ) {
-        Image(
-            painter = painterResource(id = dog.image),
-            contentDescription = "",
-            Modifier.size(100.dp, 100.dp),
-            contentScale = ContentScale.Crop
-        )
-        Column {
-            Row(modifier = Modifier.padding(8.dp)) {
-                Text(text = "Name: ")
-                Text(text = dog.name)
-            }
-            Row(modifier = Modifier.padding(8.dp)) {
-                Text(text = "Age: ")
-                Text(text = dog.age.toString())
-            }
-            Row(modifier = Modifier.padding(8.dp)) {
-                Text(text = "Breed: ")
-                Text(text = dog.category.breed)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .clickable { onclick.invoke(dog) }
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .fillMaxWidth()
+        ) {
+            Image(
+                painter = painterResource(id = dog.image),
+                contentDescription = "",
+                Modifier.size(100.dp, 100.dp),
+                contentScale = ContentScale.Crop
+            )
+            Column {
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Text(text = "Name: ")
+                    Text(text = dog.name)
+                }
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Text(text = "Age: ")
+                    Text(text = dog.age.toString())
+                }
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Text(text = "Breed: ")
+                    Text(text = dog.category.breed)
+                }
             }
         }
     }
@@ -105,7 +120,7 @@ fun LightPreview() {
     }
 }
 
-@Preview("Dark Theme", widthDp = 360, heightDp = 640)
+//@Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun DarkPreview() {
     val dogs = DogRepository().getDogs()
